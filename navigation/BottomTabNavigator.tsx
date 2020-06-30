@@ -7,9 +7,8 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
-
-import Logo from '../assets/images/head_logo.png'
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, HomeParamList } from '../types';
+import HomeScreen from '../screens/HomeScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -22,9 +21,16 @@ export default function BottomTabNavigator() {
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
         name="Home"
-        component={TabOneNavigator}
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-home" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Cards"
+        component={TabOneNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-medal" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -46,8 +52,21 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
 
+const HomeStack = createStackNavigator<HomeParamList>()
+const HomeNavigator = () => {
+  return(
+    <HomeStack.Navigator>
+      <HomeStack.Screen 
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ title: "Home Screen" }}
+      />
+    </HomeStack.Navigator>
+  )
+}
+
+const TabOneStack = createStackNavigator<TabOneParamList>();
 function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
@@ -61,7 +80,6 @@ function TabOneNavigator() {
 }
 
 const TabTwoStack = createStackNavigator<TabTwoParamList>();
-
 function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>

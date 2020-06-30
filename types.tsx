@@ -8,7 +8,12 @@ export type BottomTabParamList = {
   TabTwo: undefined;
   Home: undefined;
   Info: undefined;
+  Cards: undefined;
 };
+
+export type HomeParamList = {
+  HomeScreen: undefined
+}
 
 export type TabOneParamList = {
   TabOneScreen: undefined;
@@ -17,5 +22,3 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
-
-declare module '*.jpg';
